@@ -1,0 +1,9 @@
+<library path="librosbag_play_rviz_plugin">
+  <class name="rosbag_play_rviz_plugin/RosbagPlayPlugin"
+         type="rosbag_play_rviz_plugin::RosbagPlayPlugin"
+         base_class_type="rviz::Panel">
+    <description>
+      rosbag_play_rviz_plugin panel plugin
+    </description>
+  </class>
+</library>
