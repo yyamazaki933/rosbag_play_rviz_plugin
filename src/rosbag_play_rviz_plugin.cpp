@@ -49,6 +49,23 @@ void RosbagPlayPlugin::pb_bagClicked()
 
 void RosbagPlayPlugin::pb_startClicked()
 {
+  if (ui_->pb_start->text() == "Pause")
+  {
+    std::string command = "rosservice call " + player_name_ + "/pause_playback true";
+    ROS_INFO_STREAM(command);
+    system(command.c_str());
+    ui_->pb_start->setText("Resume");
+    return;
+  }
+  else if (ui_->pb_start->text() == "Resume")
+  {
+    std::string command = "rosservice call " + player_name_ + "/pause_playback false";
+    ROS_INFO_STREAM(command);
+    system(command.c_str());
+    ui_->pb_start->setText("Pause");
+    return;
+  }
+
   std::string bags = ui_->le_bags->text().toStdString();
   double rate = ui_->dsb_rate->value();
   int offset = ui_->sb_ofst->value();
@@ -64,7 +81,7 @@ void RosbagPlayPlugin::pb_startClicked()
   ROS_INFO_STREAM(command);
   system(command.c_str());
 
-  ui_->pb_start->setDisabled(true);
+  ui_->pb_start->setText("Pause");
   ui_->pb_stop->setDisabled(false);
 }
 
@@ -74,7 +91,7 @@ void RosbagPlayPlugin::pb_stopClicked()
   ROS_INFO_STREAM(command);
   system(command.c_str());
 
-  ui_->pb_start->setDisabled(false);
+  ui_->pb_start->setText("Start");
   ui_->pb_stop->setDisabled(true);
 }
 
